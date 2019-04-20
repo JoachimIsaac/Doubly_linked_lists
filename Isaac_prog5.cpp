@@ -67,29 +67,40 @@ SortedList::~SortedList(){
 
 void SortedList::insert(double num){
     Node * tmp = head;
-    Node * previous_node = rear;
+    Node * previous_n = rear;
     
-    //empty list
+    // if list is empty , inserts a node.
     if(head == NULL){
         rear = head = new Node(num,NULL,NULL);
     }
     else{
-        //middle
-        if(num < head->value){
-         tmp->prev = rear = new Node(num,tmp,NULL);
+        //at the front
+        //if node at front is less than num put it infront
+        if(num > head->value){
+        head = head->next = new Node(num,NULL,head);
+        }
+        //in case where num is less than node at end of list.insert at end.
+        if(num < rear->value){
+            
+            rear = rear->prev = new Node(num,rear,NULL);
         }
         //
         else{
-            while(previous_node!= NULL && num > previous_node->value){
-                tmp = previous_node;
-                previous_node = previous_node->next;
+            // starts from rear if num is greater than tmp value then
+            //it move up the list to go to front.
+            //when it finds a value less than tmp it falls out.
+            while(tmp!= NULL && num > tmp->value){
+                tmp = rear;
+                previous_n = tmp;
+                tmp = tmp->next;
                 
                 
                 
             }
-            
-            if(previous_node != NULL){
-            previous_node->prev = new Node(num,previous_node,previous_node->prev);
+            //when it falls out it inserts the node before the node which is greater than it.
+            if(tmp != NULL){
+            previous_n = previous_n->next = new Node(num,tmp,previous_n);
+            tmp->prev = previous_n;
             }
         }
        
