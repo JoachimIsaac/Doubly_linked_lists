@@ -30,7 +30,7 @@ private:
 public:
     SortedList();
     ~SortedList();
-    void insert(double );
+    void insert(double);
     
     void remove(double);
     void display(ofstream&);
@@ -55,18 +55,20 @@ SortedList::SortedList(){
 
 SortedList::~SortedList(){
     Node * tmp = head;
-    while(tmp!= NULL){
+    while(head != NULL){
+        
         head = head->prev;
         delete tmp;
         tmp = head;
         
         
     }
-    tmp = head = rear = NULL;
+ 
 }
 
+/*
 void SortedList::insert(double num){
-    Node * tmp = head;
+    Node * tmp = rear;
     Node * previous_n = rear;
     
     // if list is empty , inserts a node.
@@ -76,21 +78,25 @@ void SortedList::insert(double num){
     else{
         //at the front
         //if node at front is less than num put it infront
-        if(num > head->value){
-        head = head->next = new Node(num,NULL,head);
-        }
+    
         //in case where num is less than node at end of list.insert at end.
-        if(num < rear->value){
+        
+        if(num > head->value){
+            head = head->next = new Node(num,NULL,head);
+        }
+         if(num < rear->value){
             
             rear = rear->prev = new Node(num,rear,NULL);
         }
-        //
-        else{
+         else{
+    
             // starts from rear if num is greater than tmp value then
             //it move up the list to go to front.
             //when it finds a value less than tmp it falls out.
+             Node * tmp = rear;
+             Node * previous_n = rear;
             while(tmp!= NULL && num > tmp->value){
-                tmp = rear;
+                
                 previous_n = tmp;
                 tmp = tmp->next;
                 
@@ -106,8 +112,68 @@ void SortedList::insert(double num){
        
         
     }
-    
 }
+
+
+*/
+
+void SortedList::insert(double num){
+    
+    
+    // If first node to be insetailed in doubly
+    // linked list
+    if (head == NULL){
+        rear = head = new Node(num,NULL,NULL);
+    }
+    
+    
+    // If node to be insetailed has value less
+    // than first node
+    if (num < rear->value)
+    {
+         rear = rear->prev = new Node(num,rear,NULL);
+       
+    }
+    
+    // If node to be insetailed has value more
+    // than last node
+    if(num > head->value){
+        head = head->next = new Node(num,NULL,head);
+    }
+    
+    // Find the node before which we need to
+    // insert p.
+    Node *temp = head;
+    while (temp->value > num)
+        temp = temp->prev;
+    
+    // Insert new node infront temp
+    temp = temp->next = new Node(num,temp->next,temp);
+    temp->next->prev = temp;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -165,7 +231,7 @@ void SortedList::display(ofstream& out){
         
     Node * tmp = rear;
     while(tmp != NULL){
-        out<<tmp->value<<"  ";
+        out<<tmp->value<<"\t";
         tmp = tmp->next;
     }
         out<<endl;
@@ -188,10 +254,10 @@ if(head == NULL){
         
         Node * tmp = head;
         while(tmp != NULL){
-            out<<tmp->value<<"  ";
+            out<<tmp->value<<"\t";
             tmp = tmp->prev;
         }
-        out<<"\t";
+        out<<endl;
     }
 }
 
@@ -225,11 +291,11 @@ int main(){
         
         // Remove values from list until
         // STOP_REMOVING is found
-        while (infile >> num && num != STOP_REMOVING){
-            listA.remove(num);
-        }
-        outfile << "List after removing:\n";
-        listA.display(outfile);
+       // while (infile >> num && num != STOP_REMOVING){
+       //     listA.remove(num);
+       // }
+        //outfile << "List after removing:\n";
+        //listA.display(outfile);
          /*
         outfile << "Reverse order:\n";
         listA.displayReversed(outfile);
