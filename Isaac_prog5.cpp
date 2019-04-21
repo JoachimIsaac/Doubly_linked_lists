@@ -421,12 +421,12 @@ int main(){
          outfile << "List after removing:\n";
          listA.display(outfile);
         
-        /*
+        
          outfile << "Reverse order:\n";
          listA.displayReversed(outfile);
          outfile << endl;
          outfile << endl;
-         
+        
          // Read until sentinel of STOP_READING is found
          while (infile >> num && num != STOP_READING){
          listA.insert(num);
@@ -444,8 +444,8 @@ int main(){
          else
          cout << "Couldn't open one or more files.\n";
          
-         */
+    
         return 0;
         
     }
-}
+
