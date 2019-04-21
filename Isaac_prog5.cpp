@@ -153,7 +153,7 @@ void SortedList::insert(double num){
    
 void SortedList::remove(double num){
     
-    
+    //if list is empty
     if(head == NULL){
         cout<<"This list is empty";
     }
@@ -185,11 +185,28 @@ void SortedList::remove(double num){
         }
         
         //traverse and remove from any where (middle)
+        if(size() >= 2 && head->value != num){
+            
+            Node * tmp = head;
+            Node * prev_t = head;
+            
+            
+            while(tmp->next != NULL && tmp->value != num  ){
+                prev_t = tmp;
+                tmp = tmp->next;
+                
+            }
+            if(tmp->value == num){
+                prev_t->next = tmp->next;
+                tmp->next->prev = prev_t;
+                tmp = NULL;
+                
+            }
+        }
         
         
     }
 }
-
 /*
 
 void SortedList::remove(double num){
