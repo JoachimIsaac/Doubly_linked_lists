@@ -112,9 +112,6 @@ SortedList::~SortedList(){
 
 void SortedList::insert(double num){
     
-    
-    
-    
     if(head == NULL){
         rear = head = new Node(num);
     }
@@ -154,7 +151,44 @@ void SortedList::insert(double num){
     }
     
    
-
+void SortedList::remove(double num){
+    
+    
+    if(head == NULL){
+        cout<<"This list is empty";
+    }
+    
+    if(head != NULL){
+       
+        //remove at head
+        if(head->value == num){
+            Node* tmp = head;
+            Node* prev_n = head;
+            
+            tmp = tmp->next;
+            delete prev_n;
+            prev_n = NULL;
+            tmp->prev = NULL;
+            head = tmp;
+        }
+        
+        //remove at end
+        if(rear->value == num){
+            Node* tmp = rear;
+            Node* prev_n = rear;
+            
+            tmp = tmp->prev;
+            delete prev_n;
+            prev_n = NULL;
+            tmp->next = NULL;
+            rear = tmp;
+        }
+        
+        //traverse and remove from any where (middle)
+        
+        
+    }
+}
 
 /*
 
