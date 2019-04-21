@@ -103,7 +103,7 @@ SortedList::~SortedList(){
          
          
      }
-     
+ 
      
      
  }
@@ -112,28 +112,115 @@ SortedList::~SortedList(){
 
 void SortedList::insert(double num){
     
-    Node * tmp = rear;
+    
     
     if(head == NULL){
-        
-        head = rear = new Node(num,NULL,NULL);
+        rear = head = new Node(num);
+    }
+    else{// remember to revisit equal to greater than and less than.
+        if(head->value < num && head->next == NULL){
+            //inserts behind head if the value is less and rear does not point to anything.
+            
+          rear = head->next = new Node(num,head,NULL);
+        }
+        if(head->value > num && head->prev == NULL){
+            
+            head = head->prev = new Node(num,NULL,head);
+            //inserts infront of head if the value of head is more than num.
+        }
+        if(rear->value > num && rear->next == NULL){
+            //inserts at end
+           rear = rear->next = new Node(num,rear,NULL);
+        }
+        if(size() >= 2 && head->value < num){
+            
+            Node * tmp = head;
+            Node * prev_t = head;
+            
+          
+            while(tmp->next != NULL && tmp->value < num  ){
+                prev_t = tmp;
+                tmp = tmp->next;
+                
+            }
+            if(tmp->value > num){
+                tmp->prev = prev_t->next = new Node(num,prev_t,tmp);
+                
+            }
+            
+        }
         
     }
-    if(head!=NULL){
-        rear = rear->next = new Node(num,tmp,NULL);
-        //tmp = tmp->next;
-    }
-
+    
+   
 }
  
 
-
+/*
 void SortedList::remove(double num){
+    Node* tmp = head;
+    Node * previous_node = head;
+    
+    if(head == NULL){//////
+        cout<<"The list is empty";
+    }
+    
+    if(head != NULL){
+        if(head->value == num){
+            head = head->next;
+            delete tmp;
+            tmp = previous_node = head;
+            head->next=NULL;
+            
+        }
+        else{
+            while(tmp != NULL && tmp->value!=num){
+                tmp = tmp->next;
+            }
+            //found the node anywhere in the list beside head and end
+            if(tmp != NULL){
+                if(tmp->next != NULL){
+                    previous_node->next = tmp->next;
+                    tmp->next = previous_node;
+                    delete tmp;
+                    tmp=NULL;
+                }
+                else{
+                    //if at end of list
+                    rear = rear->prev;
+                    previous_node = tmp;
+                    previous_node->next->prev=NULL;
+                    delete tmp;
+                    previous_node = tmp = NULL;
+                    
+                }
+            }
+            
+        }
+        
+        
+    }
+}
+*/
+//finaly some progress!!!!!
+void SortedList::display(ofstream& out){
+    Node * tmp = head;
+    
+    if(head == NULL){
+        out<<"The list is empty";
+    }
+    
+    
+    
+    while(tmp->next != NULL){
+        out<<tmp->value<<" ";
+        tmp=tmp->next;
+    }
+    
     
 }
 
-
-
+/*
 void SortedList::display(ofstream& out){
     Node* tmp = head;
     Node* tmp_n = head->next;
@@ -162,12 +249,13 @@ void SortedList::display(ofstream& out){
     
     
     while(tmp!= NULL && start){
+     
         out<<tmp->value<<"\t";
         tmp=tmp->next;
     }
     out << endl;
 }
-
+*/
 
 
 int SortedList::size(){
@@ -185,6 +273,9 @@ int SortedList::size(){
     return count;
 }
 
+void SortedList::displayReversed(ofstream& out){
+    
+/*
 void SortedList::displayReversed(ofstream& out){
     Node* tmp = head;
     Node* tmp_rear = rear;
@@ -224,7 +315,7 @@ void SortedList::displayReversed(ofstream& out){
     out<<endl;
 }
 
-
+*/
 
 int main(){
     // Objects to read/write to files
@@ -248,17 +339,17 @@ int main(){
         
          outfile << "List after inserting:\n";
          listA.display(outfile);
-        outfile << "Reverse order:\n";
-        listA.displayReversed(outfile);
-        outfile << endl << endl;
+       // outfile << "Reverse order:\n";
+      //  listA.displayReversed(outfile);
+       // outfile << endl << endl;
         
-        // Remove values from list until
+         //Remove values from list until
         // STOP_REMOVING is found
-        // while (infile >> num && num != STOP_REMOVING){
-        //     listA.remove(num);
-        // }
-        //outfile << "List after removing:\n";
-        //listA.display(outfile);
+       //  while (infile >> num && num != STOP_REMOVING){
+       //      listA.remove(num);
+        //  }
+         //outfile << "List after removing:\n";
+         //listA.display(outfile);
         /*
          outfile << "Reverse order:\n";
          listA.displayReversed(outfile);
