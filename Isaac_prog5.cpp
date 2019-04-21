@@ -150,7 +150,7 @@ void SortedList::insert(double num){
         
     }
     
-   
+   //working!!!!
 void SortedList::remove(double num){
     
     //if list is empty
