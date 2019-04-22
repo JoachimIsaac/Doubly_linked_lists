@@ -1,7 +1,7 @@
 /*
  This program defines and implements a class named SortedList.
  SortedList creates and maintains a sorted list of doubles.
- */
+*/
 
 #include<string>
 #include<iostream>
@@ -41,7 +41,6 @@ public:
 
 // Implement all member functions here
 // Since outside of class, use ::
-
 // Default Constructor
 SortedList::SortedList(){
     head = NULL;
@@ -100,7 +99,7 @@ void SortedList::insert(double num){
         }
     }
     
-
+//Which removes a Node from the list; either at the front, middle or end
 void SortedList::remove(double num){
     
     //If list is empty.
@@ -110,7 +109,7 @@ void SortedList::remove(double num){
     
     if(head != NULL){
        
-        //Remove at head.
+        //Remove at head (front of list).
         if(head->value == num){
             Node* tmp = head;
             Node* prev_n = head;
@@ -122,7 +121,7 @@ void SortedList::remove(double num){
             head = tmp;
         }
         
-        //Remove at end.
+        //Remove at end of list.
         if(rear->value == num){
             Node* tmp = rear;
             Node* prev_n = rear;
@@ -172,7 +171,6 @@ void SortedList::display(ofstream& out){
     out<<endl;
     
 }
-
 
 
 //Traveres through list and returns the size of the list.
