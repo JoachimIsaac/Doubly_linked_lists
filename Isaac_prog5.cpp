@@ -59,7 +59,7 @@ SortedList::~SortedList(){
     }
 }
 
-
+//Inserts Nodes in-order lowest from head and highest to rear.
 void SortedList::insert(double num){
     
     //Inserts a Node when list is empty.
@@ -140,7 +140,7 @@ void SortedList::remove(double num){
             Node * tmp = head;
             Node * prev_t = head;
             
-            while(tmp->next != NULL && tmp->value != num  ){
+            while(tmp->next != NULL && tmp->value != num){
                 prev_t = tmp;
                 tmp = tmp->next;
             }
@@ -148,6 +148,7 @@ void SortedList::remove(double num){
             if(tmp->value == num){
                 prev_t->next = tmp->next;
                 tmp->next->prev = prev_t;
+                delete tmp;
                 tmp = NULL;
             }
         }
