@@ -68,6 +68,12 @@ void SortedList::insert(double num){
         rear = head = new Node(num);
     }
     else{
+        //inputs node behind of head if node is equal to head.
+        if(num == head->value){
+        head = head->prev = new Node(num,NULL,head);
+    }
+        
+        
         //Inserts a Node Infront of head if  head->value is less than num
         //and makes rear equal to that new Node.
         if(head->value < num && head->next == NULL){
@@ -87,23 +93,46 @@ void SortedList::insert(double num){
         //within the list and then inserts it.(inserts between two nodes)
         if(size() >= 2 && head->value < num){
             
-            Node * tmp = head;
-            Node * prev_t = head;
-            
-            while(tmp->next != NULL && tmp->value < num){
+          Node * tmp = head;
+          Node * prev_t = head;
+                
+            while(tmp->next != NULL && tmp->value < num ){
                 prev_t = tmp;
                 tmp = tmp->next;
             }
-            
+            //inputs it when value is less than the present value.
+            //this input goes in the middle.
             if(tmp->value > num){
                 tmp->prev = prev_t->next = new Node(num,prev_t,tmp);
             }
+            //inputs it at the rear if value being added is more than the
+            //present value(tmp)
             if(tmp->value < num){
                 
                rear = tmp->next = new Node(num,tmp,NULL);
             }
+            
+            //This inputs a value which is the same as another value into the list
+            //this inputs it at the rear or in the middle.
+            if(tmp->value == num){
+                
+                //How value which is the same is added at the rear.
+                if(tmp->value == rear->value){
+                    rear = tmp->next = new Node(num,tmp,NULL);
+                }
+                
+                //How value which is the same and anywhere in the list
+                //or middle is added.
+                if((tmp->value != head->value) && (tmp->value != rear->value)){
+                    
+                     tmp->prev = prev_t->next = new Node(num,prev_t,tmp);
+                }
+                
+                
+            }
         }
-    }
+        }
+
     
 //Which removes a Node from the list; either at the front, middle or end
 void SortedList::remove(double num){
