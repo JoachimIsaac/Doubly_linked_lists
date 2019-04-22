@@ -41,6 +41,8 @@ public:
 
 // Implement all member functions here
 // Since outside of class, use ::
+
+
 // Default Constructor
 SortedList::SortedList(){
     head = NULL;
@@ -58,7 +60,7 @@ SortedList::~SortedList(){
     }
 }
 
-//Inserts Nodes in-order lowest from head and highest to rear.
+//Inserts Nodes in-order lowest from head and highest at rear.
 void SortedList::insert(double num){
     
     //Inserts a Node when list is empty.
@@ -81,7 +83,7 @@ void SortedList::insert(double num){
             
           }
         }
-        //This traverses through the list and finds node less than num
+        //This traverses through the list and finds a node less than num
         //within the list and then inserts it.(inserts between two nodes)
         if(size() >= 2 && head->value < num){
             
@@ -133,7 +135,7 @@ void SortedList::remove(double num){
             rear = tmp;
         }
         
-        //Traverse and removes from anywhere (middle)
+        //Traverse and removes inbetween nodes in the (middle) of Nodes.
         if(size() >= 2 && head->value != num){
             
             Node * tmp = head;
