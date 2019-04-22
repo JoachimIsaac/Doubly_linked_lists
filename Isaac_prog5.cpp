@@ -98,6 +98,10 @@ void SortedList::insert(double num){
             if(tmp->value > num){
                 tmp->prev = prev_t->next = new Node(num,prev_t,tmp);
             }
+            if(tmp->value < num){
+                
+               rear = tmp->next = new Node(num,tmp,NULL);
+            }
         }
     }
     
